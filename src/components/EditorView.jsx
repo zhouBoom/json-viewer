@@ -30,24 +30,10 @@ const EditorView = ({ data, onJsonChange }) => {
   };
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className="editor-container">
       <button
         onClick={handleFormat}
-        style={{
-          position: 'absolute',
-          top: '1rem',
-          right: '1rem',
-          padding: '0.5rem 1rem',
-          background: '#667eea',
-          color: 'white',
-          border: 'none',
-          borderRadius: '6px',
-          cursor: 'pointer',
-          fontSize: '0.9rem',
-          transition: 'background-color 0.3s ease'
-        }}
-        onMouseEnter={(e) => e.target.style.background = '#5568d3'}
-        onMouseLeave={(e) => e.target.style.background = '#667eea'}
+        className="format-btn"
       >
         格式化
       </button>

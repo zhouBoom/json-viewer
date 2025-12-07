@@ -54,80 +54,92 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <header className="header">
-        <h1>JSON 查看工具</h1>
+    <div className="app-container">
+      <header className="app-header">
+        <div className="logo-container">
+          <span className="logo-icon">{ }</span>
+          <h1>JSON Viewer</h1>
+        </div>
+        <p className="subtitle">现代化的 JSON 数据可视化工具</p>
       </header>
-      
-      <main className="main">
-        <div className="viewer-container">
-          <div className="view-controls">
-            <div className="view-toggle">
-              <button 
-                className={`view-btn ${currentView === 'tree' ? 'active' : ''}`}
+
+      <main className="main-content">
+        <div className="glass-panel viewer-card">
+          <div className="controls-bar">
+            <div className="view-toggles">
+              <button
+                className={`toggle-btn ${currentView === 'tree' ? 'active' : ''}`}
                 onClick={() => setCurrentView('tree')}
               >
                 树状视图
               </button>
-              <button 
-                className={`view-btn ${currentView === 'list' ? 'active' : ''}`}
+              <button
+                className={`toggle-btn ${currentView === 'list' ? 'active' : ''}`}
                 onClick={() => setCurrentView('list')}
               >
                 列表视图
               </button>
-              <button 
-                className={`view-btn ${currentView === 'editor' ? 'active' : ''}`}
+              <button
+                className={`toggle-btn ${currentView === 'editor' ? 'active' : ''}`}
                 onClick={() => setCurrentView('editor')}
               >
-                编辑器视图
+                编辑器
               </button>
             </div>
-            
-            <label className="upload-btn">
-              上传JSON文件
-              <input 
-                type="file" 
-                accept=".json" 
-                onChange={handleFileUpload}
-                style={{ display: 'none' }}
-              />
-            </label>
-          </div>
-          
-          {error && (
-            <div className="error-message">
-              {error}
-            </div>
-          )}
-          
-          {!jsonData && !error && (
-            <div className="upload-section">
-              <h3>请上传JSON文件或在编辑器中输入JSON数据</h3>
-              <label className="upload-btn" style={{ marginTop: '1rem' }}>
-                选择文件
-                <input 
-                  type="file" 
-                  accept=".json" 
+
+            <div className="actions">
+              <label className="upload-btn primary">
+                <span>上传文件</span>
+                <input
+                  type="file"
+                  accept=".json"
                   onChange={handleFileUpload}
                   style={{ display: 'none' }}
                 />
               </label>
             </div>
+          </div>
+
+          {error && (
+            <div className="error-banner">
+              <span className="error-icon">⚠️</span>
+              {error}
+            </div>
           )}
-          
-          {jsonData && (
-            <>
-              <div className="view-content">
-                {renderCurrentView()}
+
+          <div className="content-area">
+            {!jsonData && !error && (
+              <div className="empty-state">
+                <div className="empty-icon">📂</div>
+                <h3>开始使用</h3>
+                <p>上传 JSON 文件</p>
+                <label className="upload-btn large">
+                  选择文件
+                  <input
+                    type="file"
+                    accept=".json"
+                    onChange={handleFileUpload}
+                    style={{ display: 'none' }}
+                  />
+                </label>
               </div>
-              
-              <DataPreview data={jsonData} />
-            </>
-          )}
+            )}
+
+            {jsonData && (
+              <>
+                <div className="view-viewport custom-scrollbar">
+                  {renderCurrentView()}
+                </div>
+                <div className="data-preview-sidebar">
+                  <DataPreview data={jsonData} />
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </main>
-      
-      <footer className="footer">
+
+      <footer className="app-footer">
         <p>JSON Viewer Tool © 2024</p>
       </footer>
     </div>
