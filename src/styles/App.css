@@ -325,7 +325,19 @@
 .list-item .node-key {
   color: var(--text-secondary);
   margin-right: var(--spacing-md);
-  min-width: 120px;
+  width: 50%;
+  /* 超出自动换行 */
+  word-break: break-all;
+  flex-shrink: 0;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
+}
+
+.list-item .node-value {
+  width: 50%;
+  word-break: break-all;
+  flex-shrink: 0;
 }
 
 /* Editor View */
