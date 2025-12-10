@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟时钟 - Analog Clock</title>
+    <meta name="description" content="一个美观的模拟时钟,实时显示当前时间,采用现代设计和响应式布局">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="clock-wrapper">
+            <h1 class="title">模拟时钟</h1>
+
+            <!-- 模拟时钟 -->
+            <div class="clock" id="analogClock">
+                <!-- 时钟中心点 -->
+                <div class="center-dot"></div>
+
+                <!-- 时针 -->
+                <div class="hand hour-hand" id="hourHand"></div>
+
+                <!-- 分针 -->
+                <div class="hand minute-hand" id="minuteHand"></div>
+
+                <!-- 秒针 -->
+                <div class="hand second-hand" id="secondHand"></div>
+
+                <!-- 时钟刻度 -->
+                <div class="clock-marks">
+                    <!-- 12个小时刻度 -->
+                    <div class="mark hour-mark" style="transform: rotate(0deg)"><span>12</span></div>
+                    <div class="mark hour-mark" style="transform: rotate(30deg)"><span>1</span></div>
+                    <div class="mark hour-mark" style="transform: rotate(60deg)"><span>2</span></div>
+                    <div class="mark hour-mark" style="transform: rotate(90deg)"><span>3</span></div>
+                    <div class="mark hour-mark" style="transform: rotate(120deg)"><span>4</span></div>
+                    <div class="mark hour-mark" style="transform: rotate(150deg)"><span>5</span></div>
+                    <div class="mark hour-mark" style="transform: rotate(180deg)"><span>6</span></div>
+                    <div class="mark hour-mark" style="transform: rotate(210deg)"><span>7</span></div>
+                    <div class="mark hour-mark" style="transform: rotate(240deg)"><span>8</span></div>
+                    <div class="mark hour-mark" style="transform: rotate(270deg)"><span>9</span></div>
+                    <div class="mark hour-mark" style="transform: rotate(300deg)"><span>10</span></div>
+                    <div class="mark hour-mark" style="transform: rotate(330deg)"><span>11</span></div>
+                </div>
+            </div>
+
+            <!-- 数字时间显示 -->
+            <div class="digital-time" id="digitalTime">00:00:00</div>
+
+            <!-- 日期显示 -->
+            <div class="date-display" id="dateDisplay">2025年12月10日 星期二</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
