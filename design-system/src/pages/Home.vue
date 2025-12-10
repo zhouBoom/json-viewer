@@ -40,7 +40,7 @@
             <p>清晰的文档和代码示例，快速上手</p>
           </div>
           <div class="card feature-card fade-in" style="animation-delay: 0.5s">
-            <div class="feature-icon">🎯</div>
+            <div class="feature-icon">📚</div>
             <h3>业务组件</h3>
             <p>丰富的业务场景组件，满足各类需求</p>
           </div>

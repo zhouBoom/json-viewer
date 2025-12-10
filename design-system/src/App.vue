@@ -96,13 +96,28 @@ main {
 @media (max-width: 768px) {
   .nav-content {
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-sm);
+    padding: var(--space-md) 0;
+  }
+  
+  .logo {
+    font-size: var(--text-lg);
+  }
+  
+  .logo-icon {
+    font-size: var(--text-xl);
   }
   
   .nav-links {
-    flex-wrap: wrap;
     justify-content: center;
-    gap: var(--space-md);
+    gap: var(--space-sm);
+    width: 100%;
+  }
+  
+  .nav-link {
+    font-size: var(--text-sm);
+    padding: var(--space-xs) var(--space-sm);
+    white-space: nowrap;
   }
 }
 </style>

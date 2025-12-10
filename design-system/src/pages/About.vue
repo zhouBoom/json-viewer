@@ -213,5 +213,17 @@ const team = ref([
 
 .contact-item span {
   color: var(--gray-600);
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .contact-item {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .contact-item strong {
+    min-width: auto;
+  }
 }
 </style>

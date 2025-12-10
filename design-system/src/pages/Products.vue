@@ -13,10 +13,6 @@
           <h3>{{ product.name }}</h3>
           <p>{{ product.description }}</p>
           <div class="product-price">¥{{ product.price }}</div>
-          <div class="product-actions">
-            <button class="btn btn-primary">立即购买</button>
-            <button class="btn btn-outline">了解详情</button>
-          </div>
         </div>
       </div>
     </div>
@@ -33,7 +29,7 @@ const products = ref([
     description: '完整的企业级设计系统解决方案，包含所有组件和模板',
     price: '9,999',
     category: '企业版',
-    icon: '🎨'
+    icon: '🔫'
   },
   {
     id: 2,
@@ -49,7 +45,7 @@ const products = ref([
     description: '包含基础组件和页面模板，适合个人开发者',
     price: '1,999',
     category: '基础版',
-    icon: '✨'
+    icon: '🆕'
   },
   {
     id: 4,
@@ -57,7 +53,7 @@ const products = ref([
     description: '完整的UI设计资源，包含Figma和Sketch文件',
     price: '2,999',
     category: '设计资源',
-    icon: '🎯'
+    icon: '🎒'
   },
   {
     id: 5,
@@ -73,7 +69,7 @@ const products = ref([
     description: '根据您的需求定制专属的设计系统',
     price: '19,999',
     category: '定制',
-    icon: '⚡'
+    icon: '😊'
   }
 ])
 </script>
