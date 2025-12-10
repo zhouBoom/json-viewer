@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+#app {
+    min-height: 100vh;
+    /* padding-bottom: 50px; */
+    max-width: 100%;
+    margin: 0 auto;
+    background: #f5f5f5;
+    transition: all 0.3s ease;
+}
+
+/* 电脑端适配 */
+@media (min-width: 768px) {
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #e8eaf0 100%);
+        padding: 0;
+    }
+
+    #app {
+        max-width: 1200px;
+        /* margin: 30px auto; */
+        background: white;
+        /* border-radius: 16px; */
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        min-height: calc(100vh - 60px);
+    }
+
+    /* PC端导航栏不固定，包含在容器内 */
+    .van-nav-bar {
+        position: relative !important;
+        /* border-radius: 16px 16px 0 0; */
+    }
+
+    /* 调整内容区域，PC端不需要顶部边距 */
+    .home-page .content,
+    .category-page .content,
+    .cart-page .content,
+    .product-page .content,
+    .user-page .content {
+        margin-top: 0 !important;
+    }
+
+    /* 优化底部导航栏 */
+    .van-tabbar {
+        position: fixed;
+        border-radius: 0 0 16px 16px;
+        max-width: 1200px;
+        margin: 0 auto;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 99;
+    }
+
+    /* 优化商品网格布局 */
+    .product-list {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+
+    /* 优化分类网格 */
+    .category-grid .van-grid {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+/* 主题色定制 */
+:root {
+    --mi-orange: #FF6700;
+    --mi-orange-dark: #e65a00;
+    --mi-gray: #f5f5f5;
+    --mi-text-dark: #333;
+    --mi-text-light: #999;
+    --mi-border: #e0e0e0;
+}
+
+/* 通用样式 */
+.page-container {
+    min-height: calc(100vh - 50px);
+    background-color: #f5f5f5;
+}
+
+.section-title {
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--mi-text-dark);
+    background: linear-gradient(135deg, #fff 0%, #fafafa 100%);
+}
+
+/* 卡片样式 */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* 按钮样式 */
+.btn-primary {
+    background: linear-gradient(135deg, var(--mi-orange) 0%, var(--mi-orange-dark) 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 4px 12px rgba(255, 103, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* 价格样式 */
+.price {
+    color: var(--mi-orange);
+    font-weight: 600;
+}
+
+.price-symbol {
+    font-size: 0.8em;
+}
+
+.price-integer {
+    font-size: 1.4em;
+}
+
+/* 自定义 Vant 组件样式 */
+.van-tabbar {
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.van-tabbar-item--active {
+    color: var(--mi-orange);
+}
+
+.van-nav-bar {
+    background: linear-gradient(135deg, var(--mi-orange) 0%, var(--mi-orange-dark) 100%);
+}
+
+.van-nav-bar__title {
+    color: white;
+    font-weight: 600;
+}
+
+/* 商品卡片 */
+.product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.product-card:active {
+    transform: scale(0.98);
+}
+
+.product-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: #f5f5f5;
+}
+
+.product-info {
+    padding: 12px;
+}
+
+.product-title {
+    font-size: 14px;
+    color: var(--mi-text-dark);
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.product-price {
+    font-size: 18px;
+    color: var(--mi-orange);
+    font-weight: 600;
+}
+
+/* 加载动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease;
+}
