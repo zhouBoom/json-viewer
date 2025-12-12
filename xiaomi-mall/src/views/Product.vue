@@ -73,8 +73,8 @@
           <span>购物车</span>
         </div>
         <div class="action-icon" @click="toggleFavorite">
-          <van-icon name="star-o" />
-          <span>收藏</span>
+          <van-icon :name="isFavorite ? 'star' : 'star-o'" :color="isFavorite ? '#FF6700' : ''" />
+          <span>{{ isFavorite ? '已收藏' : '收藏' }}</span>
         </div>
       </div>
       <div class="action-buttons">
@@ -86,12 +86,17 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { showToast, showSuccessToast } from 'vant'
 
 const router = useRouter()
 const route = useRoute()
+
+// 页面加载时重置滚动位置
+onMounted(() => {
+  window.scrollTo(0, 0)
+})
 
 const cartCount = ref(0)
 const isFavorite = ref(false)
@@ -139,7 +144,7 @@ const toggleFavorite = () => {
   if (isFavorite.value) {
     showSuccessToast('收藏成功')
   } else {
-    showToast('已取消收藏')
+    showSuccessToast('已取消收藏')
   }
 }
 
@@ -292,6 +297,11 @@ const goToCart = () => {
   font-size: 14px;
 }
 
+/* 返回按钮颜色 */
+.product-page :deep(.van-nav-bar__arrow) {
+  color: white;
+}
+
 /* 底部操作栏 */
 .goods-action-bar {
   position: fixed;
@@ -308,8 +318,8 @@ const goToCart = () => {
 
 .action-icons {
   display: flex;
-  gap: 16px;
-  padding: 0 8px;
+  gap: 8px;
+  padding: 0 4px;
 }
 
 .action-icon {
@@ -319,6 +329,7 @@ const goToCart = () => {
   gap: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 45px;
 }
 
 .action-icon:active {
@@ -333,6 +344,7 @@ const goToCart = () => {
 .action-icon span {
   font-size: 11px;
   color: #666;
+  white-space: nowrap;
 }
 
 .action-buttons {

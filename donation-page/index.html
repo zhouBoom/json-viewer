@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支持我们的项目 - 捐赠页面</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- 头部区域 -->
+        <header class="header">
+            <div class="header-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="20" fill="url(#gradient1)" />
+                    <path d="M24 14L26.5 21.5H34.5L28 26L30.5 33.5L24 29L17.5 33.5L20 26L13.5 21.5H21.5L24 14Z"
+                        fill="white" />
+                    <defs>
+                        <linearGradient id="gradient1" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF6B6B" />
+                            <stop offset="1" stop-color="#FFD93D" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h1 class="header-title">支持我们的开源项目</h1>
+            <p class="header-subtitle">您的每一份支持都将帮助我们持续改进和创新</p>
+        </header>
+
+        <!-- 项目说明区域 -->
+        <section class="project-info">
+            <h2 class="section-title">关于我们的项目</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">🚀</div>
+                    <h3>持续创新</h3>
+                    <p>我们致力于开发高质量的开源工具，为开发者社区提供更好的解决方案</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🌟</div>
+                    <h3>开源精神</h3>
+                    <p>所有代码完全开源，欢迎社区贡献和使用，共同推动技术进步</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">💡</div>
+                    <h3>未来规划</h3>
+                    <p>您的捐赠将用于服务器维护、功能开发和社区建设</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 捐赠金额选择区域 -->
+        <section class="donation-section">
+            <h2 class="section-title">选择捐赠金额</h2>
+            <div class="amount-options">
+                <button class="amount-btn" data-amount="10">
+                    <span class="amount-value">¥10</span>
+                    <span class="amount-label">一杯咖啡</span>
+                </button>
+                <button class="amount-btn" data-amount="50">
+                    <span class="amount-value">¥50</span>
+                    <span class="amount-label">支持开发</span>
+                </button>
+                <button class="amount-btn popular" data-amount="100">
+                    <div class="popular-badge">最受欢迎</div>
+                    <span class="amount-value">¥100</span>
+                    <span class="amount-label">核心支持者</span>
+                </button>
+                <button class="amount-btn" data-amount="200">
+                    <span class="amount-value">¥200</span>
+                    <span class="amount-label">铂金赞助</span>
+                </button>
+                <button class="amount-btn" data-amount="500">
+                    <span class="amount-value">¥500</span>
+                    <span class="amount-label">钻石赞助</span>
+                </button>
+            </div>
+
+            <!-- 自定义金额输入 -->
+            <div class="custom-amount">
+                <label for="customAmount" class="custom-label">
+                    <span>或输入自定义金额</span>
+                </label>
+                <div class="input-wrapper">
+                    <span class="currency-symbol">¥</span>
+                    <input type="number" id="customAmount" class="custom-input" placeholder="输入金额" min="1" step="1">
+                </div>
+            </div>
+
+            <!-- 当前选择显示 -->
+            <div class="selected-amount" id="selectedAmount">
+                <span class="selected-label">当前选择：</span>
+                <span class="selected-value" id="selectedValue">请选择金额</span>
+            </div>
+
+            <!-- 支付按钮 -->
+            <button class="pay-btn" id="payBtn" disabled>
+                <span class="btn-text">立即支付</span>
+                <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </section>
+
+        <!-- 捐赠成功提示（隐藏状态） -->
+        <div class="success-modal" id="successModal">
+            <div class="success-content">
+                <div class="success-icon">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="40" cy="40" r="38" stroke="url(#gradient2)" stroke-width="4" />
+                        <path d="M25 40L35 50L55 30" stroke="url(#gradient2)" stroke-width="4" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <defs>
+                            <linearGradient id="gradient2" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#4CAF50" />
+                                <stop offset="1" stop-color="#8BC34A" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h2 class="success-title">捐赠成功！</h2>
+                <p class="success-message">感谢您的慷慨支持！您的捐赠将帮助我们继续改进项目。</p>
+                <p class="success-amount" id="successAmount"></p>
+                <button class="close-btn" id="closeBtn">完成</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

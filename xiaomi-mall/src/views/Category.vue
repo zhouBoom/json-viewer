@@ -111,13 +111,17 @@ const goToProduct = (productId) => {
 <style scoped>
 .category-page {
   background-color: #f5f5f5;
-  min-height: 100vh;
-  padding-bottom: 50px;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
-  height: calc(100vh - 96px);
+  flex: 1;
   overflow: hidden;
+  margin-top: 46px;
+  margin-bottom: 50px;
 }
 
 .category-container {
