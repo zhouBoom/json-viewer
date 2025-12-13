@@ -37,7 +37,13 @@ customInput.addEventListener('input', function () {
     amountButtons.forEach(btn => btn.classList.remove('active'));
 
     // 获取输入的金额
-    const inputValue = parseFloat(this.value);
+    let inputValue = parseFloat(this.value);
+
+    // 限制最大值
+    if (inputValue > 99999999) {
+        inputValue = 99999999;
+        this.value = 99999999;
+    }
 
     if (inputValue && inputValue > 0) {
         currentAmount = inputValue;

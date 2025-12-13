@@ -84,11 +84,12 @@
             <!-- 自定义金额输入 -->
             <div class="custom-amount">
                 <label for="customAmount" class="custom-label">
-                    <span>或输入自定义金额</span>
+                    <span>或输入自定义金额(至多9999万)</span>
                 </label>
                 <div class="input-wrapper">
                     <span class="currency-symbol">¥</span>
-                    <input type="number" id="customAmount" class="custom-input" placeholder="输入金额" min="1" step="1">
+                    <input type="number" id="customAmount" class="custom-input" placeholder="输入金额" min="1"
+                        max="99999999" step="1" maxlength="8">
                 </div>
             </div>
 
