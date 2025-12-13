@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('捐赠页面核心功能测试', () => {
     test.beforeEach(async ({ page }) => {
-        await page.goto('/');
+        await page.goto('http://localhost:3001/pages/donation-page.html');
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(1000);
     });
