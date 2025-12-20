@@ -1,3 +1,33 @@
+<script setup>
+import VirtualTree from '../components/VirtualTree.vue'
+
+// 生成测试数据
+const generateTreeData = (count, levels) => {
+  const data = []
+  for (let i = 1; i <= count; i++) {
+    const item = {
+      id: `item-${i}`,
+      label: `节点 ${i}`,
+    }
+    if (levels > 1) {
+      item.children = generateTreeData(5, levels - 1)
+    }
+    data.push(item)
+  }
+  return data
+}
+
+const treeData = generateTreeData(100, 4) // 生成 100 个根节点，每个有 4 层子节点，总共超过 2000 条数据
+
+const handleTreeToggle = (item) => {
+  console.log('节点展开/收起:', item.label)
+}
+
+const handleTreeClick = (item) => {
+  console.log('节点点击:', item.label)
+}
+</script>
+
 <template>
   <div class="components-page">
     <div class="container">
@@ -105,6 +135,23 @@
   &lt;div&gt;列 2&lt;/div&gt;
   &lt;div&gt;列 3&lt;/div&gt;
 &lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- 虚拟滚动树组件 -->
+      <section class="component-section">
+        <h2>虚拟滚动树 Virtual Tree</h2>
+        <p>高性能树形组件，支持大数据量（2000+条）的流畅展开/收起</p>
+        <div class="component-demo">
+          <VirtualTree :data="treeData" :height="500" @toggle="handleTreeToggle" @click="handleTreeClick" />
+        </div>
+        <div class="code-example">
+          <pre><code>&lt;VirtualTree 
+  :data="treeData" 
+  :height="500" 
+  @toggle="handleToggle"
+  @click="handleClick"
+/&gt;</code></pre>
         </div>
       </section>
 
