@@ -5,6 +5,12 @@
     :style="{ height: containerHeight }"
     @scroll="handleScroll"
   >
+    <!-- 拖拽指示线 -->
+    <div 
+      class="drag-indicator"
+      :style="indicatorStyle"
+    ></div>
+    
     <div 
       class="virtual-tree-content"
       :style="{ 
@@ -19,6 +25,11 @@
         class="tree-node"
         :style="{ height: itemHeight + 'px', lineHeight: itemHeight + 'px' }"
         @click.stop="handleNodeClick(item)"
+        draggable="true"
+        @dragstart="handleDragStart(item)"
+        @dragend="handleDragEnd"
+        @dragover.prevent="handleDragOver($event, item, itemRefs[index + startIndex]!)"
+        @drop.prevent="handleDrop($event)"
       >
         <span 
           class="node-indent"
@@ -42,6 +53,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
+import { useTreeDrag } from '../composables/useTreeDrag'
 
 // Type Definitions
 interface TreeNode {
@@ -171,6 +183,20 @@ watch(() => props.data, (newData) => {
   updateVisibleItems()
 }, { deep: true, immediate: true })
 
+// 拖拽功能集成
+const { 
+  draggedNode, 
+  indicatorStyle, 
+  handleDragStart, 
+  handleDragEnd, 
+  handleDragOver, 
+  handleDrop 
+} = useTreeDrag({
+  flattenedData,
+  itemHeight,
+  indentSize
+})
+
 // Lifecycle
 onMounted(() => {
   updateVisibleItems()
@@ -188,6 +214,7 @@ const emit = defineEmits<{
   border: 1px solid #e5e7eb;
   border-radius: 6px;
   background-color: #ffffff;
+  position: relative;
 }
 
 .virtual-tree-content {
@@ -204,6 +231,14 @@ const emit = defineEmits<{
 
 .tree-node:hover {
   background-color: #f3f4f6;
+}
+
+.tree-node[draggable='true'] {
+  cursor: grab;
+}
+
+.tree-node[draggable='true']:active {
+  cursor: grabbing;
 }
 
 .node-indent {
@@ -243,5 +278,13 @@ const emit = defineEmits<{
   flex: 1;
   font-size: 14px;
   color: #111827;
+}
+
+.drag-indicator {
+  position: absolute;
+  background-color: #3b82f6;
+  border-radius: 2px;
+  z-index: 1000;
+  pointer-events: none;
 }
 </style>
