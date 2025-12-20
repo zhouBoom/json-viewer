@@ -40,8 +40,34 @@ test.describe('设计系统 - 主要功能测试', () => {
         await page.goto('/components')
 
         await expect(page.locator('h1')).toContainText('组件库文档')
-        await expect(page.locator('.component-section')).toHaveCount(6)
+        await expect(page.locator('.component-section')).toHaveCount(7) // 更新为7个组件
         await expect(page.locator('.btn')).toHaveCount(7) // 至少有几个按钮示例
+    })
+
+    // 虚拟树组件测试
+    test('虚拟树组件应该正确渲染和交互', async ({ page }) => {
+        await page.goto('/components')
+
+        // 验证虚拟树组件存在
+        const virtualTree = page.locator('.virtual-tree-container')
+        await expect(virtualTree).toBeVisible()
+
+        // 验证初始节点渲染（虚拟滚动只渲染可见节点）
+        const treeNodes = page.locator('.tree-node')
+        const initialCount = await treeNodes.count()
+        await expect(initialCount).toBeGreaterThanOrEqual(1)
+
+        // 验证展开/收起功能
+        const firstToggle = treeNodes.first().locator('.node-toggle')
+        await expect(firstToggle).toBeVisible()
+        await firstToggle.click() // 点击展开第一个节点
+
+        // 验证展开后显示更多节点
+        const expandedCount = await page.locator('.tree-node').count()
+        await expect(expandedCount).toBeGreaterThan(initialCount)
+
+        // 再次点击收起
+        await firstToggle.click()
     })
 
     // 产品展示页面测试
