@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import VirtualTree from '../components/VirtualTree.vue'
 
 // 生成测试数据
@@ -32,7 +33,7 @@ const generateTreeData = (count, levels) => {
   return data
 }
 
-const treeData = generateTreeData(20, 4) // 生成 20 * 20 * 20 * 20 = 16000 个节点用于测试虚拟滚动
+const treeData = ref(generateTreeData(5, 3)) // 使用较少的节点便于测试拖拽功能
 </script>
 
 <template>
@@ -150,7 +151,7 @@ const treeData = generateTreeData(20, 4) // 生成 20 * 20 * 20 * 20 = 16000 个
         <h2>虚拟树 Virtual Tree</h2>
         <p>高性能树形组件，支持虚拟滚动，可处理大量数据</p>
         <div class="component-demo">
-          <VirtualTree :data="treeData" height="500px" />
+          <VirtualTree :data="treeData" height="500px" @update:data="treeData = $event" />
         </div>
         <div class="code-example">
           <pre><code>&lt;VirtualTree :data="treeData" height="500px" /&gt;</code></pre>
