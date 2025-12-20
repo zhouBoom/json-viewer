@@ -1,3 +1,40 @@
+<script setup>
+import VirtualTree from '../components/VirtualTree.vue'
+
+// 生成测试数据
+const generateTreeData = (count, levels) => {
+  const data = []
+  
+  const generateChildren = (parentId, currentLevel) => {
+    if (currentLevel >= levels) return []
+    
+    const children = []
+    for (let i = 1; i <= count; i++) {
+      const id = `${parentId}-${i}`
+      children.push({
+        id,
+        label: `节点 ${id}`,
+        children: generateChildren(id, currentLevel + 1)
+      })
+    }
+    return children
+  }
+  
+  for (let i = 1; i <= count; i++) {
+    const id = `node-${i}`
+    data.push({
+      id,
+      label: `节点 ${id}`,
+      children: generateChildren(id, 1)
+    })
+  }
+  
+  return data
+}
+
+const treeData = generateTreeData(20, 4) // 生成 20 * 20 * 20 * 20 = 16000 个节点用于测试虚拟滚动
+</script>
+
 <template>
   <div class="components-page">
     <div class="container">
@@ -105,6 +142,18 @@
   &lt;div&gt;列 2&lt;/div&gt;
   &lt;div&gt;列 3&lt;/div&gt;
 &lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- 虚拟树组件 -->
+      <section class="component-section">
+        <h2>虚拟树 Virtual Tree</h2>
+        <p>高性能树形组件，支持虚拟滚动，可处理大量数据</p>
+        <div class="component-demo">
+          <VirtualTree :data="treeData" height="500px" />
+        </div>
+        <div class="code-example">
+          <pre><code>&lt;VirtualTree :data="treeData" height="500px" /&gt;</code></pre>
         </div>
       </section>
 
