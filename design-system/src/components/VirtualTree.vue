@@ -1,10 +1,18 @@
 <template>
   <div 
-    ref="containerRef" 
+    ref="treeContainerRef" 
     class="virtual-tree-container"
     :style="{ height: containerHeight }"
     @scroll="handleScroll"
   >
+    <!-- Drag Indicator -->
+    <div 
+      v-if="indicatorPosition" 
+      class="drag-indicator"
+      :class="`drag-indicator-${indicatorPosition.type}`"
+      :style="{ top: indicatorPosition.top + 'px' }"
+    ></div>
+    
     <div 
       class="virtual-tree-content"
       :style="{ 
@@ -17,7 +25,13 @@
         :key="item.id"
         :ref="el => { if (el) itemRefs[index + startIndex] = el }"
         class="tree-node"
+        :class="{ 'dragging': draggedNode?.id === item.id }"
         :style="{ height: itemHeight + 'px', lineHeight: itemHeight + 'px' }"
+        draggable="true"
+        @dragstart.stop="handleDragStart(item, $event)"
+        @dragover.stop="handleDragOver(item, $event, itemRefs[index + startIndex])"
+        @drop.stop="handleDrop(item, $event)"
+        @dragend.stop="handleDragEnd()"
         @click.stop="handleNodeClick(item)"
       >
         <span 
@@ -42,6 +56,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
+import { useTreeDrag } from '../composables/useTreeDrag'
 
 // Type Definitions
 interface TreeNode {
@@ -73,6 +88,28 @@ const containerHeight = computed(() => {
 })
 const itemHeight = ref(props.itemHeight || 32)
 const indentSize = ref(props.indentSize || 24)
+
+// Emits
+const emit = defineEmits<{
+  'node-click': [item: FlattenedNode],
+  'update:data': [data: any[]]
+}>
+
+// Tree Drag Composable
+const {
+  containerRef: treeContainerRef,
+  indicatorPosition,
+  draggedNode,
+  handleDragStart,
+  handleDragOver,
+  handleDrop,
+  handleDragEnd
+} = useTreeDrag(props.data, {
+  itemHeight: itemHeight.value,
+  onDragEnd: (updatedData) => {
+    emit('update:data', updatedData)
+  }
+})
 
 // Refs
 const containerRef = ref<HTMLElement | null>(null)
@@ -108,9 +145,9 @@ const flattenTree = (nodes: TreeNode[], level: number = 0, parentId: string | nu
 }
 
 const updateVisibleItems = () => {
-  if (!containerRef.value) return
+  if (!treeContainerRef.value) return
   
-  const containerHeight = containerRef.value.clientHeight
+  const containerHeight = treeContainerRef.value.clientHeight
   const visibleCount = Math.ceil(containerHeight / itemHeight.value) + 10 // Add buffer
   
   startIndex.value = Math.floor(scrollTop.value / itemHeight.value)
@@ -150,8 +187,8 @@ const handleNodeClick = (item: FlattenedNode) => {
 }
 
 const handleScroll = () => {
-  if (containerRef.value) {
-    scrollTop.value = containerRef.value.scrollTop
+  if (treeContainerRef.value) {
+    scrollTop.value = treeContainerRef.value.scrollTop
     updateVisibleItems()
   }
 }
@@ -175,11 +212,6 @@ watch(() => props.data, (newData) => {
 onMounted(() => {
   updateVisibleItems()
 })
-
-// Emits
-const emit = defineEmits<{
-  'node-click': [item: FlattenedNode]
-}>()
 </script>
 
 <style scoped>
@@ -188,6 +220,7 @@ const emit = defineEmits<{
   border: 1px solid #e5e7eb;
   border-radius: 6px;
   background-color: #ffffff;
+  position: relative;
 }
 
 .virtual-tree-content {
@@ -204,6 +237,11 @@ const emit = defineEmits<{
 
 .tree-node:hover {
   background-color: #f3f4f6;
+}
+
+.tree-node.dragging {
+  opacity: 0.5;
+  background-color: #e0e7ff;
 }
 
 .node-indent {
@@ -243,5 +281,27 @@ const emit = defineEmits<{
   flex: 1;
   font-size: 14px;
   color: #111827;
+}
+
+.drag-indicator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.drag-indicator-before,
+.drag-indicator-after {
+  height: 2px;
+  background-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.drag-indicator-inside {
+  height: 2px;
+  background-color: #10b981;
+  box-shadow: 0 0 0 1px #10b981;
+  margin-left: 24px;
 }
 </style>
